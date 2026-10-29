@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>For My Babii ♡</title>
+
+<style>
+:root {
+  --sky: #9edfff;
+  --blue: #4da9e8;
+  --ink: #17324a;
+}
+
+* { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  font-family: Georgia, "Times New Roman", serif;
+  color: var(--ink);
+  background: linear-gradient(145deg, #c7edff, #8acbfa, #e2f6ff);
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+button, input { font: inherit; }
+button { cursor: pointer; border: 0; }
+
+.screen {
+  min-height: 100svh;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 28px 16px;
+  position: relative;
+  isolation: isolate;
+}
+
+.screen.active {
+  display: flex;
+  animation: appear .8s ease both;
+}
+
+@keyframes appear {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.glow {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: -2;
+  background:
+    radial-gradient(circle at 15% 15%, #ffffffb3, transparent 32%),
+    radial-gradient(circle at 85% 75%, #ffffff73, transparent 30%);
+}
+
+.floral-border::before,
+.floral-border::after {
+  content: "✿  ❀  ✿  ❀  ✿";
+  position: absolute;
+  left: 12px;
+  right: 12px;
+  text-align: center;
+  color: #fff8fd;
+  font-size: 19px;
+  letter-spacing: 8px;
+  pointer-events: none;
+}
+
+.floral-border::before { top: 12px; }
+.floral-border::after { bottom: 12px; }
+
+.panel {
+  width: min(760px, 100%);
+  padding: 42px 25px;
+  background: #ffffffa8;
+  border: 1px solid #ffffffe6;
+  border-radius: 28px;
+  box-shadow: 0 18px 60px #215c8425;
+  backdrop-filter: blur(12px);
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.smallcaps {
+  font: 700 .75rem/1.4 system-ui, sans-serif;
+  letter-spacing: .28em;
+  text-transform: uppercase;
+  color: #397fae;
+}
+
+h1, h2 {
+  font-weight: 400;
+  line-height: 1.15;
+  margin: 12px 0 18px;
+}
+
+h1 { font-size: clamp(2.2rem, 8vw, 4rem); }
+h2 { font-size: clamp(1.8rem, 6vw, 2.7rem); }
+
+p {
+  font-size: 1.08rem;
+  line-height: 1.9;
+  white-space: pre-line;
+}
+
+.muted {
+  font: .95rem/1.7 system-ui, sans-serif;
+  color: #41657e;
+}
+
+.primary {
+  padding: 14px 25px;
+  border-radius: 999px;
+  background: linear-gradient(135deg, #63baf0, #397fce);
+  color: white;
+  font: 700 1rem system-ui, sans-serif;
+  box-shadow: 0 8px 22px #317fc044;
+  transition: transform .2s;
+}
+
+.primary:hover { transform: translateY(-2px); }
+
+.ghost {
+  margin-top: 12px;
+  padding: 10px 17px;
+  border-radius: 999px;
+  background: #ffffffa6;
+  color: #245c83;
+  font: 600 .9rem system-ui, sans-serif;
+  border: 1px solid white;
+}
+
+.pinbox {
+  width: min(330px, 100%);
+  margin: 20px auto 10px;
+  display: block;
+  padding: 14px 16px;
+  border: 1px solid #8cccf0;
+  border-radius: 14px;
+  background: #ffffffd9;
+  text-align: center;
+  outline: none;
+}
+
+.pinbox:focus { box-shadow: 0 0 0 4px #76c8f455; }
+
+.error {
+  min-height: 24px;
+  color: #b53c73;
+  font: 600 .9rem system-ui, sans-serif;
+}
+
+.heart {
+  position: fixed;
+  z-index: 10;
+  bottom: -30px;
+  animation: floatUp linear forwards;
+  pointer-events: none;
+  opacity: .75;
+}
+
+@keyframes floatUp {
+  to {
+    transform: translateY(-115vh) rotate(30deg);
+    opacity: 0;
+  }
+}
+
+.letter {
+  text-align: left;
+  padding: 30px clamp(18px, 5vw, 48px);
+}
+
+.letter h2 { text-align: center; }
+
+.letter p {
+  font-size: 1.03rem;
+  line-height: 1.95;
+}
+
+.divider {
+  color: #4a9fd5;
+  font-size: 1.5rem;
+  letter-spacing: .35em;
+  margin: 10px 0 18px;
+  text-align: center;
+}
+
+.section-actions {
+  text-align: center;
+  margin-top: 25px;
+}
+
+/* FLOWER ENDING */
+
+.final-screen {
+  background: radial-gradient(
+    circle at 50% 45%,
+    #b6f1ff 0%,
+    #73c7f4 40%,
+    #3d83c2 100%
+  );
+}
+
+.flower-scene {
+  min-height: 100svh;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  overflow: hidden;
+  position: relative;
+}
+
+.flower-stage {
+  width: min(520px, 95vw);
+  height: 430px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.big-flower {
+  position: relative;
+  width: 180px;
+  height: 180px;
+  animation: breathe 3s ease-in-out infinite;
+  filter: drop-shadow(0 0 22px #fff7a8);
+}
+
+@keyframes breathe {
+  0%, 100% { transform: scale(.95); }
+  50% { transform: scale(1.06); }
+}
+
+.petal {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 55px;
+  height: 95px;
+  transform-origin: 50% 88%;
+  border-radius: 55% 55% 42% 42%;
+  background: linear-gradient(
+    180deg,
+    #fff7bd,
+    #ffcfef 72%,
+    #ff9fca
+  );
+  box-shadow: inset 0 0 12px #fff9;
+  transform:
+    translate(-50%, -88%)
+    rotate(var(--r))
+    translateY(-28px);
+}
+
+.petal:nth-child(1) { --r: 0deg; }
+.petal:nth-child(2) { --r: 45deg; }
+.petal:nth-child(3) { --r: 90deg; }
+.petal:nth-child(4) { --r: 135deg; }
+.petal:nth-child(5) { --r: 180deg; }
+.petal:nth-child(6) { --r: 225deg; }
+.petal:nth-child(7) { --r: 270deg; }
+.petal:nth-child(8) { --r: 315deg; }
+
+.flower-center {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 57px;
+  height: 57px;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  background: radial-gradient(
+    circle,
+    #fff6a2,
+    #ffb849 70%,
+    #f38b3e
+  );
+  box-shadow: 0 0 25px #ffe99c;
+}
+
+.stem {
+  position: absolute;
+  width: 9px;
+  height: 155px;
+  top: 235px;
+  left: calc(50% - 4px);
+  background: linear-gradient(90deg, #368b61, #a1d99a);
+  border-radius: 20px;
+  transform: rotate(2deg);
+  z-index: -1;
+}
+
+.leaf {
+  position: absolute;
+  width: 64px;
+  height: 30px;
+  background: linear-gradient(135deg, #b9edb3, #4caa79);
+  border-radius: 100% 0 100% 0;
+  top: 300px;
+  left: calc(50% + 2px);
+  transform: rotate(-20deg);
+}
+
+.leaf.two {
+  left: calc(50% - 63px);
+  top: 328px;
+  transform: scaleX(-1) rotate(-20deg);
+}
+
+.tiny-flower {
+  position: absolute;
+  font-size: 24px;
+  animation: drift 5s ease-in-out infinite;
+  filter: drop-shadow(0 0 7px white);
+}
+
+@keyframes drift {
+  0%, 100% { transform: translate(0, 0) rotate(0); }
+  50% { transform: translate(22px, -28px) rotate(18deg); }
+}
+
+.final-message {
+  font: 700 clamp(1.6rem, 6vw, 2.5rem) system-ui, sans-serif;
+  color: white;
+  text-shadow: 0 0 12px #5c8fc9, 0 0 28px white;
+  letter-spacing: .03em;
+  text-align: center;
+  padding: 0 15px;
+  animation: messageGlow 2.4s ease-in-out infinite;
+}
+
+@keyframes messageGlow {
+  0%, 100% { text-shadow: 0 0 12px #5c8fc9, 0 0 28px white; }
+  50% { text-shadow: 0 0 20px #ffaad7, 0 0 38px white; }
+}
+
+@media (max-width: 480px) {
+  .panel { padding: 38px 18px; }
+  .letter { padding: 30px 18px; }
+  .flower-stage { height: 390px; }
+}
+</style>
+</head>
+
+<body>
+<div class="glow"></div>
+
+<!-- PAGE 1: SECRET PIN -->
+<section class="screen active floral-border" id="lockScreen">
+  <div class="panel">
+    <div class="smallcaps">a little surprise for you</div>
+    <h1>Our Love Story ♡</h1>
+
+    <p class="muted">A tiny place made with love, just for you.</p>
+    <div class="divider">❀ ✿ ❀</div>
+
+    <p class="muted">
+      Clue: <strong>“our love story started”</strong>
+    </p>
+
+    <form id="pinForm">
+      <input
+        class="pinbox"
+        id="pinInput"
+        type="password"
+        autocomplete="off"
+        placeholder="Enter our secret PIN / clue"
+        aria-label="Secret PIN"
+        required
+      >
+
+      <button class="primary" type="submit">
+        Unlock My Surprise ♡
+      </button>
+
+      <div class="error" id="pinError" aria-live="polite"></div>
+    </form>
+
+    <p class="muted">Psst… use the clue as the secret code. ♡</p>
+  </div>
+</section>
+
+<!-- PAGE 2: WELCOME -->
+<section class="screen floral-border" id="welcomeScreen">
+  <div class="panel">
+    <div class="smallcaps">to my favorite person</div>
+
+    <h1>Happiii 3rd monthsary<br>Babiii Rheanne 😗</h1>
+
+    <div class="divider">✿ ❀ ✿</div>
+
+    <p>Three months of us, and so many more memories waiting for us. ♡</p>
+
+    <button class="primary" onclick="goTo('letterScreen')">
+      Enter my little world ♡
+    </button>
+
+    <p class="muted">Tap to continue… a little animation is waiting for you.</p>
+  </div>
+</section>
+
+<!-- PAGE 3: FIRST MESSAGE -->
+<section class="screen" id="letterScreen">
+  <article class="panel letter">
+    <div class="smallcaps" style="text-align:center">letter no. 01</div>
+
+    <h2>Happy 3rd Monthsary babii! 💐</h2>
+    <div class="divider">❀ ─ ♡ ─ ❀</div>
+
+    <p>Haii, Happy 3rd monthsary for us, Three months na ta, and I'm so happy nga you are the person nga akong na meet, gi love, and choose, every single day. Maybe three months is still short for other people, pero for me, these three months mean so much. You've given me so many reasons to smile, so many beautiful memories to treasure, and so many moments nga thankful kaayo ko kay naa ka sa akong life. Bii, thank you for staying with me, for loving me, and for making me feel nga I'm someone worth loving. Thank you for being my pahinga, sa tiring day, my happiness sa mga times nga dili okay ang all , and my favorite person nga gusto nako maka talk about sa akong days. Even with this distance between us, you still make me feel loved in ways nga lisod i-explain. Usahay, mingawon lang gyud ko nimo ug kalit, and I wish I could be there beside you, hold your hand, look into your eyes, and tell you personally how much you mean to me.</p>
+
+    <p>I know nga dili man permi perfect ang atong relationship. There will be misunderstandings, and days nga dili nato figure out ang each other, but babii I want you to know nga I'm willing to learn, to understand you better, and to grow with you. I don't want to be someone who only loves you when everything is easy. I want to be someone who chooses to understand you even when things get difficult. I want us to keep learning how to love each other in the right way, with patience, honesty, respect, and understanding.</p>
+
+    <p>My love, I hope you never feel nga you have to be perfect just to deserve my love. You can be happy, sad, tired, emotional, or quiet, and you can still be the same person I love. You don't always have to be strong around me, okay? I want you to feel safe enough to tell me what's bothering you, what makes you happy, and even the little things nga you think don't matter. I want to know you more, not just the happy parts of you, but also the parts that need extra understanding and care. And bii, I'm sorry for the times nga naa koy mga kulang for youu. I know nga I still have a lot to learn, and I may not always know the perfect words to say or the perfect things to do. But I promise to keep trying to become a better partner for you. I want my love to be something you can feel through my actions, not just something you read in my messages. I want you to feel appreciated, respected, and loved even on ordinary days when there's no special occasion.</p>
+
+    <p>Someday babii, I hope all these days of missing each other will turn into beautiful memories nga ikatawa nalang nato together 💞. I look forward to the day nga dili na ta mag-goodnight through a screen, the day nga I can finally spend time with you in person, and the day nga I can make more memories with you beyond our calls and messages. Until that day comes, let's continue supporting each other, chasing our dreams, and growing as individuals while building something beautiful together.</p>
+
+    <p>Happy 3rd monthsary again my Rheanne Jayne , asawa nako 🥹💗 . Thank you for being part of my life. If I could choose all over again, I would still want to know you, fall for you, and build this kind of love with you. I can't promise that every day will be perfect, but I hope I can keep showing you that my intentions are genuine and that I truly value what we have.</p>
+
+    <p>Three months down, and I hope for many more months and years of choosing each other. I pray nga God will continue to guide us, give us patience, and help us become better for ourselves and for our relationship. Whatever challenges come our way, I hope we remember why we started and how much this love means to both of us. I love you so much biiii. More than these words can explain, more than what I can fit into one letter, and more than what I can tell you in one call. Thank you for being you, for being my person, and for making these three months special in your own beautiful way. Happy 3rd monthsary, my only exception, my favorite person. Here's to more monthsaries, more random messages, more lambing, more dreams, and more memories together. Always remember nga you have someone here who is proud of you, who wants to see you happy, and who genuinely wishes the best for you.</p>
+
+    <p>I love you today, tomorrow, and in all the ordinary days in between. Always us bii, Strictly yours, always. ♡ I love you so much babii. Happy 3rd monthsary po! Mwaaaaa! 💗</p>
+
+    <div class="section-actions">
+      <button class="primary" onclick="goTo('loveMostScreen')">
+        Next little surprise ✨
+      </button>
+    </div>
+  </article>
+</section>
+
+<!-- PAGE 4: WHAT I LOVE MOST -->
+<section class="screen" id="loveMostScreen">
+  <article class="panel letter">
+    <div class="smallcaps" style="text-align:center">little things i adore</div>
+
+    <h2>What I love the most of you ♡</h2>
+    <div class="divider">✿ ✧ ❀ ✧ ✿</div>
+
+    <p>Your smile and pretty eyes are what I love the most about youuu, babiii. 🥹 Every time mag-call ta, I love hearing your voice, listening to your chikas, and everything about youuu. I love the moments nga magstorya ta sa , like ahhh, makamiss kaayo when I think about them. Especially those days nga sige lang tag kiat and joke with each other. I hope dili na mawala atong pagkakiat no? HAHAHAHA. Ganahan kaayo ko sa mga days nga mag-joke rata sa each other and everything feels so light and happy. I love that side of you so muchhh, babiii.</p>
+
+    <p>I hope that someday, even as we grow older and become more mature, we never lose that playful side of us. I hope we can still laugh at our random jokes, tease each other, and enjoy even the simplest moments together. I love the best version of youuu so much babiii, and I hope that part of you will never change. I hope we keep choosing each other every day and continue doing our best to make this relationship last. I love you for being who you are right now, and I'm so lucky to have you in my lifeee. I love you so muchii babiii 💗</p>
+
+    <div class="section-actions">
+      <button class="primary" onclick="goTo('futureScreen')">
+        Keep going, babii ♡
+      </button>
+    </div>
+  </article>
+</section>
+
+<!-- PAGE 5: OUR FUTURE -->
+<section class="screen" id="futureScreen">
+  <article class="panel letter">
+    <div class="smallcaps" style="text-align:center">a dream for someday</div>
+
+    <h2>My dream in our future ✨</h2>
+    <div class="divider">♡ ─ ❀ ─ ♡</div>
+
+    <p>My dream for us in the future is to be successful in life, to settle down together, and to finally be physically together. I always dream about us walking side by side, exploring places we've never visited before, and making beautiful memories together. I often imagine our future life. Ga imagine ko nga, how wonderful it would be to finally experience all these things with you 🥹Grabig fantasy no? HAHAHAHAHA. But I believe nothing is impossible if we keep moving forward and choosing each other every day. I want to see us achieve our dreams, support each other through life's challenges, and grow together as we build our future. I look forward to the day when we won't have to miss each other through a screen anymore because we'll finally be together, making all these dreams our reality. For now, let's be patient, trust God's timing, and keep doing our best for ourselves and for our future. I hope that someday, we'll look back at these days and smile because we never gave up on the future we dreamed of. I love you so much babiii! ♡</p>
+
+    <div class="section-actions">
+      <button class="primary" onclick="bloom()">
+        One last surprise 🌸
+      </button>
+    </div>
+  </article>
+</section>
+
+<!-- PAGE 6: GLOWING FLOWER -->
+<section class="screen final-screen" id="flowerScreen">
+  <div class="flower-scene">
+
+    <div class="flower-stage">
+      <div class="stem"></div>
+      <div class="leaf"></div>
+      <div class="leaf two"></div>
+
+      <div class="big-flower">
+        <div class="petal"></div>
+        <div class="petal"></div>
+        <div class="petal"></div>
+        <div class="petal"></div>
+        <div class="petal"></div>
+        <div class="petal"></div>
+        <div class="petal"></div>
+        <div class="petal"></div>
+        <div class="flower-center"></div>
+      </div>
+
+      <span class="tiny-flower" style="left:8%;top:16%">✿</span>
+      <span class="tiny-flower" style="left:23%;top:68%;animation-delay:-1s">❀</span>
+      <span class="tiny-flower" style="right:13%;top:19%;animation-delay:-2s">✿</span>
+      <span class="tiny-flower" style="right:8%;top:67%;animation-delay:-.5s">❀</span>
+      <span class="tiny-flower" style="left:47%;top:5%;animation-delay:-3s">✧</span>
+      <span class="tiny-flower" style="left:4%;top:46%;animation-delay:-2.5s">❀</span>
+      <span class="tiny-flower" style="right:4%;top:44%;animation-delay:-1.5s">✿</span>
+    </div>
+
+    <div class="final-message">I LOVEYOUU BABIIIII🥹</div>
+
+    <p style="color:white;text-shadow:0 1px 8px #2f6c9d;text-align:center">
+      Always us. Strictly yours, always. ♡
+    </p>
+
+    <button class="ghost" onclick="goTo('lockScreen')">
+      Replay from the beginning ♡
+    </button>
+  </div>
+</section>
+
+<script>
+const screens = [...document.querySelectorAll(".screen")];
+
+function goTo(id) {
+  screens.forEach(screen => {
+    screen.classList.toggle("active", screen.id === id);
+  });
+
+  window.scrollTo({ top: 0, behavior: "smooth" });
+
+  if (id === "welcomeScreen") {
+    sprinkleHearts(18);
+  }
+}
+
+// SECRET CLUE / PIN
+document.getElementById("pinForm").addEventListener("submit", function(e) {
+  e.preventDefault();
+
+  const entered = document.getElementById("pinInput")
+    .value.trim().toLowerCase().replace(/\s+/g, " ");
+
+  const error = document.getElementById("pinError");
+
+  if (entered === "our love story started") {
+    error.textContent = "";
+    document.getElementById("pinInput").value = "";
+    goTo("welcomeScreen");
+  } else {
+    error.textContent = "Not quite, babii. Try the clue exactly as written. ♡";
+    document.getElementById("pinInput").focus();
+  }
+});
+
+// FLOATING HEARTS AND FLOWERS
+function sprinkleHearts(amount) {
+  for (let i = 0; i < amount; i++) {
+    const el = document.createElement("span");
+    el.className = "heart";
+    el.textContent = ["♡", "♥", "✿", "❀"][
+      Math.floor(Math.random() * 4)
+    ];
+
+    el.style.left = Math.random() * 100 + "vw";
+    el.style.fontSize = (14 + Math.random() * 20) + "px";
+    el.style.animationDuration = (4 + Math.random() * 5) + "s";
+
+    document.body.appendChild(el);
+    setTimeout(() => el.remove(), 9500);
+  }
+}
+
+setInterval(() => {
+  if (
+    document.getElementById("welcomeScreen").classList.contains("active") ||
+    document.getElementById("flowerScreen").classList.contains("active")
+  ) {
+    sprinkleHearts(2);
+  }
+}, 1600);
+
+// FINAL FLOWER SURPRISE
+function bloom() {
+  goTo("flowerScreen");
+  sprinkleHearts(28);
+}
+</script>
+
+</body>
+</html>
